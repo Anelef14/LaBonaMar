@@ -1,23 +1,20 @@
 package com.backend.LaBonaMar.dto;
-
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReservationDto {
 
-    private int id;
     private int numOfPerson;
-    private Date date;
-    private List<Integer> availableScedule;
+    private String name;
+    private LocalDate date;
+    private LocalTime time;
 }

@@ -1,16 +1,13 @@
 package com.backend.LaBonaMar.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 @Entity
 @Getter
 @Setter
@@ -21,6 +18,11 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int numOfPerson;
-    private Date date;
-    private List<Integer> availableScedule;
+    private String name;
+    private LocalDate date;
+    private LocalTime time;
+    private boolean reserved;
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status;
+    private String managementToken;
 }

@@ -2,6 +2,9 @@ package com.backend.LaBonaMar.service;
 
 import com.backend.LaBonaMar.dto.ReservationDto;
 
+import java.util.List;
+
 public interface ReservationService {
-    public void createReservation (ReservationDto reservationDto);
+    public ReservationDto createReservation (ReservationDto reservationDto);
+    public List<ReservationDto> getAllAvailableReservations();
 }
