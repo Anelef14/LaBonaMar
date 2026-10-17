@@ -1,6 +1,7 @@
 package com.backend.LaBonaMar.repository;
 
 import com.backend.LaBonaMar.entity.Reservation;
+import com.backend.LaBonaMar.entity.ReservationStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +14,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     boolean existsByDateAndTime(LocalDate date, LocalTime time);
     Reservation findByName(String name);
     List<Reservation> findByReservedFalse();
+    Reservation findByManagementToken(String managementToken);
+    List<Reservation>findByDateAndStatus(LocalDate date, ReservationStatus status);
 }

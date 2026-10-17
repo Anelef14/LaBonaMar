@@ -25,4 +25,5 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
     private String managementToken;
+    private String email;
 }

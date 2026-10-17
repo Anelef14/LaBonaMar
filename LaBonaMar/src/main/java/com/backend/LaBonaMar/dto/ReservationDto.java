@@ -17,4 +17,5 @@ public class ReservationDto {
     private String name;
     private LocalDate date;
     private LocalTime time;
+    private String email;
 }

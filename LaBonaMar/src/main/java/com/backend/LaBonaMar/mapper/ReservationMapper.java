@@ -15,6 +15,7 @@ public class ReservationMapper {
         reservation.setName(dto.getName());
         reservation.setDate(dto.getDate());
         reservation.setTime(dto.getTime());
+        reservation.setEmail(dto.getEmail());
         reservation.setReserved(true);
 
         return reservation;
@@ -28,6 +29,7 @@ public class ReservationMapper {
         dto.setName(reservation.getName());
         dto.setDate(reservation.getDate());
         dto.setTime(reservation.getTime());
+        dto.setEmail(reservation.getEmail());
 
         return dto;
 }}
