@@ -1,6 +1,8 @@
 package com.backend.LaBonaMar.service.ServiceImpl;
 
+import com.backend.LaBonaMar.dto.RescheduleRequestDto;
 import com.backend.LaBonaMar.dto.ReservationDto;
+import com.backend.LaBonaMar.dto.ReservationResponseDto;
 import com.backend.LaBonaMar.entity.Reservation;
 import com.backend.LaBonaMar.entity.ReservationStatus;
 import com.backend.LaBonaMar.mapper.ReservationMapper;
@@ -25,7 +27,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     public ReservationDto createReservation (ReservationDto reservationDto){
-    boolean output = reservationRepository.existsByDateAndTime(reservationDto.getDate(),reservationDto.getTime());
+    boolean output = reservationRepository.existsByDateAndTime(reservationDto.getDate(),reservationDto.getTime(), ReservationStatus.CONFIRMED);
     if (output){
         throw new RuntimeException("This time slot is already reserved");
     }
@@ -47,5 +49,21 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationDtos;
     }
+
+    @Override
+    public ReservationResponseDto rescheduleReservation(String token, RescheduleRequestDto rescheduleRequestDto) {
+        Reservation reservation = reservationRepository.findByManagementToken(token);
+        if(reservation.getStatus()==ReservationStatus.CANCELLED){
+            throw new RuntimeException("Reservation is already cancelled, make a new reservation");
+        }
+        reservation.setDate(rescheduleRequestDto.getDate());
+        reservation.setTime(rescheduleRequestDto.getTime());
+        Reservation saved = reservationRepository.save(reservation);
+        String managementUrl = "http://localhost:5500/manage-reservation.html?token=" + saved.getManagementToken();
+        emailService.sendUpdatedEmail(reservation, managementUrl);
+
+        return reservationMapper.toResponseDto(saved);
+    }
+
 
 }

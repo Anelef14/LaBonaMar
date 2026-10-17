@@ -1,6 +1,9 @@
 package com.backend.LaBonaMar.controller;
 
+import com.backend.LaBonaMar.dto.RescheduleDto;
+import com.backend.LaBonaMar.dto.RescheduleRequestDto;
 import com.backend.LaBonaMar.dto.ReservationDto;
+import com.backend.LaBonaMar.dto.ReservationResponseDto;
 import com.backend.LaBonaMar.service.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +30,10 @@ public class ReservationController {
                 .status(HttpStatus.CREATED)
                 .body(createdReservation);
     }
-
+        @PutMapping("/reschedule/{token}")
+    public ResponseEntity<ReservationResponseDto> rescheduleReservationDto(@PathVariable String token, @RequestBody RescheduleRequestDto rescheduleDto){
+        ReservationResponseDto reservation = reservationService.rescheduleReservation(token, rescheduleDto);
+        return new ResponseEntity<>(reservation, HttpStatus.OK);
+    }
 
 }

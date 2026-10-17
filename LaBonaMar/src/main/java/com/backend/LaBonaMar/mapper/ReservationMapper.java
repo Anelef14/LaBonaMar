@@ -1,6 +1,7 @@
 package com.backend.LaBonaMar.mapper;
 
 import com.backend.LaBonaMar.dto.ReservationDto;
+import com.backend.LaBonaMar.dto.ReservationResponseDto;
 import com.backend.LaBonaMar.entity.Reservation;
 import org.springframework.stereotype.Component;
 
@@ -32,4 +33,16 @@ public class ReservationMapper {
         dto.setEmail(reservation.getEmail());
 
         return dto;
-}}
+}
+    public ReservationResponseDto toResponseDto(Reservation reservation) {
+
+        ReservationResponseDto dto = new ReservationResponseDto();
+
+        dto.setNumOfPerson(reservation.getNumOfPerson());
+        dto.setName(reservation.getName());
+        dto.setDate(reservation.getDate());
+        dto.setTime(reservation.getTime());
+        dto.setEmail(reservation.getEmail());
+
+        return dto;
+    }}

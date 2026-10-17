@@ -11,8 +11,7 @@ import java.util.List;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
-    boolean existsByDateAndTime(LocalDate date, LocalTime time);
-    Reservation findByName(String name);
+    boolean existsByDateAndTime(LocalDate date, LocalTime time, ReservationStatus status);
     List<Reservation> findByReservedFalse();
     Reservation findByManagementToken(String managementToken);
     List<Reservation>findByDateAndStatus(LocalDate date, ReservationStatus status);
